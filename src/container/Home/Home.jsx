@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import BlogPost from '../BlogPost/BlogPost';
 // import YouTubeComp from '../../component/YouTubeComp/YouTubeComp';
-import Product from '../Product/Product';
+// import Product from '../Product/Product';
 
 class Home extends React.Component {
     render() {
@@ -27,9 +28,15 @@ class Home extends React.Component {
             //         desc='1k ditonton, 12 hari yang lalu' 
             //     />
             //     <YouTubeComp />
+            // <Product></Product>
+            
             // </div> 
-            <Product></Product>
-
+            <div>
+                <p>Blog Post</p>
+                <hr/>
+                <BlogPost></BlogPost>
+            </div>
+            
         )
     }
 }
