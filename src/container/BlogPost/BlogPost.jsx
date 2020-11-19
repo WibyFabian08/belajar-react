@@ -11,7 +11,8 @@ class BlogPost extends React.Component {
             title: '',
             body: '',
             userId: 1
-        }
+        },
+        isUpdate: false
     }
 
     getDataAPI = () => {
@@ -23,6 +24,10 @@ class BlogPost extends React.Component {
         })
     }
 
+    componentDidMount() {
+        this.getDataAPI();
+    }
+
     handleRemove = (data) => {
         axios.delete(`http://localhost:3004/posts/${data}`)
         .then((result) => {
@@ -30,11 +35,41 @@ class BlogPost extends React.Component {
         })
     }
 
+    handleUpdate = (data) => {
+        console.log(data);
+        this.setState({
+            formBlogPost: data,
+            isUpdate: true
+        })
+        
+    }
+
+    putDataToAPI = () => {
+        axios.put(`http://localhost:3004/posts/${this.state.formBlogPost.id}`, this.state.formBlogPost)
+        .then((result) => {
+            console.log(result);
+            this.getDataAPI();
+
+            this.setState({
+                isUpdate: false,
+                formBlogPost: {
+                    id: 1,
+                    title: '',
+                    body: '',
+                    userId: 1
+                }
+            })
+        })
+    }
+
     handleFormChange = (event) => {
         let formBlogPostNew = {...this.state.formBlogPost};
         let timeStamp = new Date().getTime();
         
-        formBlogPostNew['id'] = timeStamp;
+        if(!this.state.isUpdate) {
+            formBlogPostNew['id'] = timeStamp;
+        }
+
         formBlogPostNew[event.target.name] = event.target.value;
 
         this.setState({
@@ -46,17 +81,26 @@ class BlogPost extends React.Component {
         axios.post('http://localhost:3004/posts', this.state.formBlogPost)
         .then((result) => {
             this.getDataAPI();
+
+            this.setState({
+                formBlogPost: {
+                    id: 1,
+                    title: '',
+                    body: '',
+                    userId: 1
+                }
+            })
         }, (err) => {
             console.log('error', err);
         })
     }
 
     handleSubmit = () => {
-        this.postDataToAPI();
-    }
-
-    componentDidMount() {
-        this.getDataAPI();
+        if(this.state.isUpdate) {
+            this.putDataToAPI();
+        } else {
+            this.postDataToAPI();
+        }
     }
 
     render() {
@@ -65,14 +109,14 @@ class BlogPost extends React.Component {
                 <p className='section-title'>Blog Post</p>
                 <div className="form-add-post">
                     <lable htmlFor="title">Title</lable>
-                    <input type="text" name='title' placeholder='add title' onChange={this.handleFormChange}/>
+                    <input value={this.state.formBlogPost.title} type="text" name='title' placeholder='add title' onChange={this.handleFormChange}/>
                     <label htmlFor="body">Blog Content</label>
-                    <textarea name="body" id="body" cols="30" rows="10" placeholder='add body content' onChange={this.handleFormChange}></textarea>
+                    <textarea value={this.state.formBlogPost.body} name="body" id="body" cols="30" rows="10" placeholder='add body content' onChange={this.handleFormChange}></textarea>
                     <button className='btn-submit' onClick={this.handleSubmit}>Simpan</button>
                 </div>
                 {
                     this.state.post.map(post =>  {
-                        return <Post key={post.id} data={post} remove={this.handleRemove}></Post>
+                        return <Post key={post.id} data={post} remove={this.handleRemove} update={this.handleUpdate}></Post>
                     })
                 }  
             </Fragment>
