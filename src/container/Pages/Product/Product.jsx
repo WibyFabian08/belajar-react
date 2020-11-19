@@ -1,6 +1,6 @@
 import React from 'react';
 import './Product.css';
-import CardProduct from '../CardProduct/CardProduct';
+import CardProduct from '../Product/CardProduct/CardProduct';
 import { Fragment } from 'react';
 
 class Product extends React.Component {
@@ -17,6 +17,8 @@ class Product extends React.Component {
     render() {
         return(
             <Fragment>
+                <p>Halaman Product</p>
+                <hr/>
                 <div className="header">
                     <div className="logo">
                         <img src="https://info.etanee.id/wp-content/uploads/2020/06/Logo-etanee-LEAF-GREEN-500px.png" alt="logo-product"/>

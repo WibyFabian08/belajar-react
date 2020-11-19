@@ -1,41 +1,35 @@
+// library
 import React, { Fragment } from 'react';
-import BlogPost from '../BlogPost/BlogPost';
-// import YouTubeComp from '../../component/YouTubeComp/YouTubeComp';
-// import Product from '../Product/Product';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from 'react-router-dom';
+
+// pages
+import BlogPost from '../Pages/BlogPost/BlogPost';
+import YouTubeCompPage from '../Pages/YouTubeCompPage/YouTubeCompPage';
+import Product from '../Pages/Product/Product';
+
+// styles
+import './Home.css';
 
 class Home extends React.Component {
     render() {
         return(
-            // <div>
-            //     <YouTubeComp 
-            //         time='7.12'
-            //         title='Belajar React js part 1'
-            //         desc='100x ditonton, 2 hari yang lalu' 
-            //     />
-            //     <YouTubeComp 
-            //         time='9.17' 
-            //         title='Belajar React js part 2' 
-            //         desc='10x ditonton, 3 hari yang lalu' 
-            //     />
-            //     <YouTubeComp 
-            //         time='10.21' 
-            //         title='Belajar React js part 3' 
-            //         desc='500x ditonton, 10 hari yang lalu' 
-            //     />
-            //     <YouTubeComp 
-            //         time='7.12' 
-            //         title='Belajar React js part 4' 
-            //         desc='1k ditonton, 12 hari yang lalu' 
-            //     />
-            //     <YouTubeComp />
-            // <Product></Product>
-            
-            // </div> 
-            <div>
-                <p>Blog Post</p>
-                <hr/>
-                <BlogPost></BlogPost>
-            </div>
+            <Router>
+                <div className='link-container'>
+                    <Link className='link' to='/'>Home</Link>
+                    <Link className='link' to='/product'>Product</Link>
+                    <Link className='link' to='/youtube'>Youtube</Link>
+                </div>
+                <Switch>
+                    <Route exact path='/' component={BlogPost}></Route>
+                    <Route path='/product' component={Product}></Route>
+                    <Route path='/youtube' component={YouTubeCompPage}></Route>
+                </Switch>
+            </Router>
             
         )
     }

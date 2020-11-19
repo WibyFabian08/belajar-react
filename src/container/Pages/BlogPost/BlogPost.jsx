@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import Post from '../../component/Post/Post';
+import Post from '../../../component/Post/Post';
 import axios from 'axios';
 import './BlogPost.css';
 
@@ -106,6 +106,8 @@ class BlogPost extends React.Component {
     render() {
         return(
             <Fragment>
+                <p>Halaman Blog Post</p>
+                <hr/>
                 <p className='section-title'>Blog Post</p>
                 <div className="form-add-post">
                     <lable htmlFor="title">Title</lable>
