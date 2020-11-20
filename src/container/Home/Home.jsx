@@ -11,6 +11,7 @@ import {
 import BlogPost from '../Pages/BlogPost/BlogPost';
 import YouTubeCompPage from '../Pages/YouTubeCompPage/YouTubeCompPage';
 import Product from '../Pages/Product/Product';
+import DetailPost from '../Pages/BlogPost/DetailPost/DetailPost';
 
 // styles
 import './Home.css';
@@ -25,7 +26,8 @@ class Home extends React.Component {
                     <Link className='link' to='/youtube'>Youtube</Link>
                 </div>
                 <Switch>
-                    <Route exact path='/' component={BlogPost}></Route>
+                    <Route path='/' exact component={BlogPost}></Route>
+                    <Route path='/detail-post/:postID' component={DetailPost}></Route>
                     <Route path='/product' component={Product}></Route>
                     <Route path='/youtube' component={YouTubeCompPage}></Route>
                 </Switch>

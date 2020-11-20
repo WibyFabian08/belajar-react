@@ -5,6 +5,8 @@ class YouTubeCompPage extends React.Component {
     render() {
         return (
             <Fragment>
+                <p>Halaman YouTube</p>
+                <hr/>
                 <YouTubeComp 
                     time='7.12'
                     title='Belajar React js part 1'

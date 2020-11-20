@@ -103,6 +103,11 @@ class BlogPost extends React.Component {
         }
     }
 
+    // fungsi ini hanya untuk tempat perpindahan halaman
+    handleDetail = (id) => {
+        this.props.history.push(`/detail-post/${id}`);
+    }
+
     render() {
         return(
             <Fragment>
@@ -118,7 +123,7 @@ class BlogPost extends React.Component {
                 </div>
                 {
                     this.state.post.map(post =>  {
-                        return <Post key={post.id} data={post} remove={this.handleRemove} update={this.handleUpdate}></Post>
+                        return <Post key={post.id} data={post} remove={this.handleRemove} update={this.handleUpdate} goDetail={this.handleDetail}></Post>
                     })
                 }  
             </Fragment>
