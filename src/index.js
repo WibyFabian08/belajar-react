@@ -3,9 +3,40 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Home from '../src/container/Home/Home';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+
+
+// initial state
+const globalState = {
+  totalOrder: 0
+}
+
+// reducer
+const rootReducer = (state = globalState, action) => {
+  if(action.type === 'ADD_ORDER') {
+    return {
+      totalOrder: state.totalOrder + 1
+    }
+  }
+  if(action.type === 'MINUS_ORDER') {
+    if(state.totalOrder > 0) {
+      return {
+        totalOrder: state.totalOrder - 1
+      }
+    }
+  }
+
+  return state;
+}
+
+// store
+const storeRedux = createStore(rootReducer);
 
 ReactDOM.render(
-    <Home></Home>
+    <Provider store={storeRedux}>
+      <Home></Home>
+    </Provider>
   ,document.getElementById('root')
 );
 

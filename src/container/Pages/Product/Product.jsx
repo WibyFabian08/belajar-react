@@ -2,17 +2,18 @@ import React from 'react';
 import './Product.css';
 import CardProduct from '../Product/CardProduct/CardProduct';
 import { Fragment } from 'react';
+import {connect} from 'react-redux';
 
 class Product extends React.Component {
-    state = {
-        order: 4
-    }
+    // state = {
+    //     order: 4
+    // }
 
-    productHandleCounterChange = (newValue) => {
-        this.setState({
-            order: newValue
-        })
-    }
+    // productHandleCounterChange = (newValue) => {
+    //     this.setState({
+    //         order: newValue
+    //     })
+    // }
 
     render() {
         return(
@@ -25,13 +26,19 @@ class Product extends React.Component {
                     </div>
                     <div className="troley">
                         <img src="" alt="logo-troley"/>
-                        <div className="count">{this.state.order}</div>
+                        <div className="count">{this.props.order}</div>
                     </div>
                 </div>
-                <CardProduct productOnCounter={(value) => this.productHandleCounterChange(value)}></CardProduct>
+                <CardProduct></CardProduct>
             </Fragment>
         );
     }
 }
 
-export default Product;
+const mapStateToProps = (state) => {
+    return {
+        order: state.totalOrder
+    }
+}
+
+export default connect(mapStateToProps)(Product);
