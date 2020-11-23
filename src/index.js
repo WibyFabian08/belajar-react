@@ -5,30 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import Home from '../src/container/Home/Home';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-
-
-// initial state
-const globalState = {
-  totalOrder: 0
-}
-
-// reducer
-const rootReducer = (state = globalState, action) => {
-  if(action.type === 'ADD_ORDER') {
-    return {
-      totalOrder: state.totalOrder + 1
-    }
-  }
-  if(action.type === 'MINUS_ORDER') {
-    if(state.totalOrder > 0) {
-      return {
-        totalOrder: state.totalOrder - 1
-      }
-    }
-  }
-
-  return state;
-}
+import rootReducer from './redux/reducer/globalReducer';
 
 // store
 const storeRedux = createStore(rootReducer);

@@ -1,39 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import ActionType from '../../../../redux/reducer/globalActionType';
 
 class Counter extends React.Component {
-    // state = {
-    //     order: 4
-    // }
-
-    // handlePlus = () => {
-    //     if(this.state.order < 10) {
-    //         this.setState({
-    //             order: this.state.order + 1
-    //         }, () => {
-    //             this.btnHandleCounterChange(this.state.order);
-    //         })
-    //     } else {
-    //         alert('tidak boleh lebih dari 10 pesanan');
-    //     }
-    // }
-
-    // handleMinus = () => {
-    //     if(this.state.order > 0) {
-    //         this.setState({
-    //             order: this.state.order - 1
-    //         }, () => {
-    //             this.btnHandleCounterChange(this.state.order);
-    //         })
-    //     }
-    // }
-
-    // // fungsi untuk mengirim perubahan state dari halaman counter ke halaman product
-    // btnHandleCounterChange = (newValue) => {
-    //     // props dari halaman product
-    //     this.props.cardOnCounter(newValue);
-    // }
-
     render() {
         return(
             <div className="counter">
@@ -53,8 +22,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handlePlus: () => dispatch({type: 'ADD_ORDER'}),
-        handleMinus: () => dispatch({type: 'MINUS_ORDER'})
+        handlePlus: () => dispatch({type: ActionType.PLUS_ORDER}),
+        handleMinus: () => dispatch({type: ActionType.MINUS_ORDER})
     }
 }
 

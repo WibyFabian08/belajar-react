@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import Post from '../../../component/Post/Post';
 import axios from 'axios';
 import './BlogPost.css';
+import {connect} from 'react-redux';
 
 class BlogPost extends React.Component {
     state = {
@@ -125,10 +126,18 @@ class BlogPost extends React.Component {
                     this.state.post.map(post =>  {
                         return <Post key={post.id} data={post} remove={this.handleRemove} update={this.handleUpdate} goDetail={this.handleDetail}></Post>
                     })
-                }  
+                }
+                <hr/> 
+                <p>Total Order = {this.props.order}</p>
             </Fragment>
         )
     }
 }
 
-export default BlogPost;
+const mapStateToProps = (state) => {
+    return {
+        order: state.totalOrder
+    }
+}
+
+export default connect(mapStateToProps)(BlogPost);

@@ -5,16 +5,6 @@ import { Fragment } from 'react';
 import {connect} from 'react-redux';
 
 class Product extends React.Component {
-    // state = {
-    //     order: 4
-    // }
-
-    // productHandleCounterChange = (newValue) => {
-    //     this.setState({
-    //         order: newValue
-    //     })
-    // }
-
     render() {
         return(
             <Fragment>
