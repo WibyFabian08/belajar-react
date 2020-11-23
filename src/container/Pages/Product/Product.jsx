@@ -8,7 +8,7 @@ class Product extends React.Component {
         order: 4
     }
 
-    handleCounterChange = (newValue) => {
+    productHandleCounterChange = (newValue) => {
         this.setState({
             order: newValue
         })
@@ -28,9 +28,9 @@ class Product extends React.Component {
                         <div className="count">{this.state.order}</div>
                     </div>
                 </div>
-                <CardProduct onCounterChange={(value) => this.handleCounterChange(value)}></CardProduct>
+                <CardProduct productOnCounter={(value) => this.productHandleCounterChange(value)}></CardProduct>
             </Fragment>
-        )
+        );
     }
 }
 
