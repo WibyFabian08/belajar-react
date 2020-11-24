@@ -11,6 +11,7 @@ const rootReducer = (state = globalState, action) => {
       totalOrder: state.totalOrder + 1
     }
   }
+  
   if(action.type === ActionType.MINUS_ORDER) {
     if(state.totalOrder > 0) {
       return {
