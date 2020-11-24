@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import Post from '../../../component/Post/Post';
 import axios from 'axios';
 import './BlogPost.css';
-import {RootContext} from '../../Home/Home';
+import {GlobalConsumer} from '../../../context/context';
 
 class BlogPost extends React.Component {
     state = {
@@ -111,35 +111,27 @@ class BlogPost extends React.Component {
 
     render() {
         return(
-            <RootContext.Consumer>
+            <Fragment>
+                <p>Halaman Blog Post</p>
+                <hr/>
+                <p className='section-title'>Blog Post</p>
+                <div className="form-add-post">
+                    <lable htmlFor="title">Title</lable>
+                    <input value={this.state.formBlogPost.title} type="text" name='title' placeholder='add title' onChange={this.handleFormChange}/>
+                    <label htmlFor="body">Blog Content</label>
+                    <textarea value={this.state.formBlogPost.body} name="body" id="body" cols="30" rows="10" placeholder='add body content' onChange={this.handleFormChange}></textarea>
+                    <button className='btn-submit' onClick={this.handleSubmit}>Simpan</button>
+                </div>
                 {
-                    value => {
-                        return(
-                            <Fragment>
-                                <p>Halaman Blog Post</p>
-                                <hr/>
-                                <p className='section-title'>Blog Post</p>
-                                <div className="form-add-post">
-                                    <lable htmlFor="title">Title</lable>
-                                    <input value={this.state.formBlogPost.title} type="text" name='title' placeholder='add title' onChange={this.handleFormChange}/>
-                                    <label htmlFor="body">Blog Content</label>
-                                    <textarea value={this.state.formBlogPost.body} name="body" id="body" cols="30" rows="10" placeholder='add body content' onChange={this.handleFormChange}></textarea>
-                                    <button className='btn-submit' onClick={this.handleSubmit}>Simpan</button>
-                                </div>
-                                {
-                                    this.state.post.map(post =>  {
-                                        return <Post key={post.id} data={post} remove={this.handleRemove} update={this.handleUpdate} goDetail={this.handleDetail}></Post>
-                                    })
-                                }
-                                <hr/> 
-                                <p>Total Order = {value.state.totalOrder}</p>
-                            </Fragment>
-                        )
-                    }
+                    this.state.post.map(post =>  {
+                        return <Post key={post.id} data={post} remove={this.handleRemove} update={this.handleUpdate} goDetail={this.handleDetail}></Post>
+                    })
                 }
-            </RootContext.Consumer>
+                <hr/> 
+                <p>Total Order = {this.props.state.totalOrder}</p>
+        </Fragment>
         )
     }
 }
 
-export default BlogPost;
+export default GlobalConsumer(BlogPost);
