@@ -1,29 +1,31 @@
 import React, {createContext} from 'react';
 
-// context
+// membuat context
 export const RootContext = createContext();
 const Provider = RootContext.Provider;
 
-// provider
+// provider / penyedia value
 const GlobalProvider = (Children) => {
     return(
         class ParentComp extends React.Component {
+            // deklarisi state / value
             state = {
                 totalOrder: 0
             }
-        
+            
+            // fungsi pengubah value atau state
             dispatch = (action) => {
                 if(action.type === 'PLUS_ORDER') {
                     return this.setState({
                         totalOrder: this.state.totalOrder + 1
-                    })
+                    });
                 } 
         
                 if(action.type === 'MINUS_ORDER') {
                     if(this.state.totalOrder > 0) {
                         return this.setState({
                             totalOrder: this.state.totalOrder - 1
-                        })
+                        });
                     }
                 } 
             }
@@ -38,7 +40,7 @@ const GlobalProvider = (Children) => {
                     }>
                         <Children {...this.props}></Children>
                     </Provider>
-                )
+                );
             }
         }
     )
@@ -47,7 +49,7 @@ const GlobalProvider = (Children) => {
 
 export default GlobalProvider;
 
-// consumer
+// consumer / pengguna value
 const Consumer = RootContext.Consumer;
 
 export const GlobalConsumer = (Children) => {
@@ -60,7 +62,7 @@ export const GlobalConsumer = (Children) => {
                             value => {
                                 return (
                                     <Children {...this.props} {...value}></Children>
-                                )
+                                );
                             }
                         }
                     </Consumer>

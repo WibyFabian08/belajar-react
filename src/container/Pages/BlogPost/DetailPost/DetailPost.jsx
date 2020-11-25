@@ -11,6 +11,7 @@ class DetailPost extends React.Component {
             body: ''
         }
     }
+    
     componentDidMount(){
         let id = this.props.match.params.postID
         Axios.get(`http://localhost:3004/posts/${id}`)

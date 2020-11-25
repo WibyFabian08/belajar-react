@@ -1,5 +1,5 @@
 // library
-import React, { Fragment, createContext } from 'react';
+import React, { Fragment } from 'react';
 import {
     BrowserRouter as Router,
     Switch,
@@ -12,11 +12,12 @@ import BlogPost from '../Pages/BlogPost/BlogPost';
 import YouTubeCompPage from '../Pages/YouTubeCompPage/YouTubeCompPage';
 import Product from '../Pages/Product/Product';
 import DetailPost from '../Pages/BlogPost/DetailPost/DetailPost';
+
+// context
 import GlobalProvider from '../../context/context';
 
 // styles
 import './Home.css';
-import RootConstext from '../../context/context';
 
 class Home extends React.Component {
     render() {

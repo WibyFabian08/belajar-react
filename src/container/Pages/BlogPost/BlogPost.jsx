@@ -3,32 +3,41 @@ import Post from '../../../component/Post/Post';
 import axios from 'axios';
 import './BlogPost.css';
 import {GlobalConsumer} from '../../../context/context';
+import API from '../../../services';
 
 class BlogPost extends React.Component {
     state = {
-        post: [],
+        post: [], // untuk menampung semua data hasil getDataAPI
         formBlogPost: {
             id: 1,
             title: '',
             body: '',
             userId: 1
         },
-        isUpdate: false
+        isUpdate: false,
+        comments: []
     }
 
+    // mengambil data dari API
     getDataAPI = () => {
-        axios.get('http://localhost:3004/posts?_sort=id&_order=desc')
-        .then((result) => {
+        API.getNewsBlog().then(result => {
             this.setState({
-                post: result.data
+                post: result
+            })
+        })
+        API.getComments().then(result => {
+            this.setState({
+                comments: result
             })
         })
     }
 
+    // me-mounting data hasil dari getDataAPI
     componentDidMount() {
         this.getDataAPI();
     }
 
+    // menghapus data dari API
     handleRemove = (data) => {
         axios.delete(`http://localhost:3004/posts/${data}`)
         .then((result) => {
@@ -45,6 +54,7 @@ class BlogPost extends React.Component {
         
     }
 
+    // mengupdate / edit data API
     putDataToAPI = () => {
         axios.put(`http://localhost:3004/posts/${this.state.formBlogPost.id}`, this.state.formBlogPost)
         .then((result) => {
@@ -63,6 +73,7 @@ class BlogPost extends React.Component {
         })
     }
 
+    // fungsi update data API
     handleFormChange = (event) => {
         let formBlogPostNew = {...this.state.formBlogPost};
         let timeStamp = new Date().getTime();
@@ -71,6 +82,7 @@ class BlogPost extends React.Component {
             formBlogPostNew['id'] = timeStamp;
         }
 
+        // target name adalah name dari setiap form input
         formBlogPostNew[event.target.name] = event.target.value;
 
         this.setState({
@@ -78,6 +90,7 @@ class BlogPost extends React.Component {
         })
     }
 
+    // post data pada API
     postDataToAPI = () => {
         axios.post('http://localhost:3004/posts', this.state.formBlogPost)
         .then((result) => {
@@ -96,6 +109,7 @@ class BlogPost extends React.Component {
         })
     }
 
+    // mengganti tombol simpan atau tombol update
     handleSubmit = () => {
         if(this.state.isUpdate) {
             this.putDataToAPI();
@@ -104,7 +118,7 @@ class BlogPost extends React.Component {
         }
     }
 
-    // fungsi ini hanya untuk tempat perpindahan halaman
+    // fungsi ini hanya untuk tempat perpindahan halaman / seperti route
     handleDetail = (id) => {
         this.props.history.push(`/detail-post/${id}`);
     }
@@ -122,6 +136,11 @@ class BlogPost extends React.Component {
                     <textarea value={this.state.formBlogPost.body} name="body" id="body" cols="30" rows="10" placeholder='add body content' onChange={this.handleFormChange}></textarea>
                     <button className='btn-submit' onClick={this.handleSubmit}>Simpan</button>
                 </div>
+                {
+                    this.state.comments.map(comment => {
+                        return <p>{comment.name} - {comment.email}</p>
+                    })
+                }
                 {
                     this.state.post.map(post =>  {
                         return <Post key={post.id} data={post} remove={this.handleRemove} update={this.handleUpdate} goDetail={this.handleDetail}></Post>
