@@ -92,10 +92,8 @@ class BlogPost extends React.Component {
 
     // post data pada API
     postDataToAPI = () => {
-        axios.post('http://localhost:3004/posts', this.state.formBlogPost)
-        .then((result) => {
+        API.postNewsBlog(this.state.formBlogPost).then((result) => {
             this.getDataAPI();
-
             this.setState({
                 formBlogPost: {
                     id: 1,
@@ -104,8 +102,6 @@ class BlogPost extends React.Component {
                     userId: 1
                 }
             })
-        }, (err) => {
-            console.log('error', err);
         })
     }
 
@@ -136,11 +132,11 @@ class BlogPost extends React.Component {
                     <textarea value={this.state.formBlogPost.body} name="body" id="body" cols="30" rows="10" placeholder='add body content' onChange={this.handleFormChange}></textarea>
                     <button className='btn-submit' onClick={this.handleSubmit}>Simpan</button>
                 </div>
-                {
+                {/* {
                     this.state.comments.map(comment => {
                         return <p>{comment.name} - {comment.email}</p>
                     })
-                }
+                } */}
                 {
                     this.state.post.map(post =>  {
                         return <Post key={post.id} data={post} remove={this.handleRemove} update={this.handleUpdate} goDetail={this.handleDetail}></Post>
