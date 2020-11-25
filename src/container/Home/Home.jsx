@@ -12,6 +12,7 @@ import BlogPost from '../Pages/BlogPost/BlogPost';
 import YouTubeCompPage from '../Pages/YouTubeCompPage/YouTubeCompPage';
 import Product from '../Pages/Product/Product';
 import DetailPost from '../Pages/BlogPost/DetailPost/DetailPost';
+import Hooks from '../Pages/Hooks/Hooks';
 
 // context
 import GlobalProvider from '../../context/context';
@@ -29,12 +30,14 @@ class Home extends React.Component {
                         <Link className='link' to='/'>Home</Link>
                         <Link className='link' to='/product'>Product</Link>
                         <Link className='link' to='/youtube'>Youtube</Link>
+                        <Link className='link' to='/hooks'>Hooks</Link>
                     </div>
                     <Switch>
                         <Route path='/' exact component={BlogPost}></Route>
                         <Route path='/detail-post/:postID' component={DetailPost}></Route>
                         <Route path='/product' component={Product}></Route>
                         <Route path='/youtube' component={YouTubeCompPage}></Route>
+                        <Route path='/hooks' component={Hooks}></Route>
                     </Switch>
                 </Fragment>
             </Router>  

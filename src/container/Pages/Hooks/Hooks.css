@@ -1,0 +1,30 @@
+.container-hooks {
+    margin-top: 10px;
+    padding: 5px;
+    width: 30%;
+    border: 1px solid black;
+}
+
+.add-btn {
+    background: none;
+    outline: none;
+    border: none;
+    background-color: rgb(36, 36, 241);
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.min-btn {
+    background: none;
+    outline: none;
+    border: none;
+    background-color:red;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 6px;
+}
+

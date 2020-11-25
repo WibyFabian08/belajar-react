@@ -37,40 +37,6 @@ class BlogPost extends React.Component {
         this.getDataAPI();
     }
 
-    // menghapus data dari API
-    handleRemove = (data) => {
-        axios.delete(`http://localhost:3004/posts/${data}`)
-        .then((result) => {
-            this.getDataAPI();
-        })
-    }
-
-    handleUpdate = (data) => {
-        console.log(data);
-        this.setState({
-            formBlogPost: data,
-            isUpdate: true
-        })
-        
-    }
-
-    // fungsi update data API
-    handleFormChange = (event) => {
-        let formBlogPostNew = {...this.state.formBlogPost};
-        let timeStamp = new Date().getTime();
-        
-        if(!this.state.isUpdate) {
-            formBlogPostNew['id'] = timeStamp;
-        }
-
-        // target name adalah name dari setiap form input
-        formBlogPostNew[event.target.name] = event.target.value;
-
-        this.setState({
-            formBlogPost: formBlogPostNew
-        })
-    }
-
     // post data pada API
     postDataToAPI = () => {
         API.postNewsBlog(this.state.formBlogPost).then((result) => {
@@ -100,6 +66,38 @@ class BlogPost extends React.Component {
                 }
             })
         })
+    }
+
+    // fungsi update data API
+    handleFormChange = (event) => {
+        let formBlogPostNew = {...this.state.formBlogPost};
+        let timeStamp = new Date().getTime();
+        
+        if(!this.state.isUpdate) {
+            formBlogPostNew['id'] = timeStamp;
+        }
+
+        // target name adalah name dari setiap form input
+        formBlogPostNew[event.target.name] = event.target.value;
+
+        this.setState({
+            formBlogPost: formBlogPostNew
+        })
+    }
+
+    handleUpdate = (data) => {
+        this.setState({
+            formBlogPost: data,
+            isUpdate: true
+        })
+        
+    }
+
+    // menghapus data dari API
+    handleRemove = (data) => {
+        API.deleteNewsBlog(data).then((result) => {
+            this.getDataAPI();
+        }) 
     }
 
     // mengganti tombol simpan atau tombol update
