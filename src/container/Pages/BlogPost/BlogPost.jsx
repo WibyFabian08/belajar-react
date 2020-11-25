@@ -54,25 +54,6 @@ class BlogPost extends React.Component {
         
     }
 
-    // mengupdate / edit data API
-    putDataToAPI = () => {
-        axios.put(`http://localhost:3004/posts/${this.state.formBlogPost.id}`, this.state.formBlogPost)
-        .then((result) => {
-            console.log(result);
-            this.getDataAPI();
-
-            this.setState({
-                isUpdate: false,
-                formBlogPost: {
-                    id: 1,
-                    title: '',
-                    body: '',
-                    userId: 1
-                }
-            })
-        })
-    }
-
     // fungsi update data API
     handleFormChange = (event) => {
         let formBlogPostNew = {...this.state.formBlogPost};
@@ -95,6 +76,22 @@ class BlogPost extends React.Component {
         API.postNewsBlog(this.state.formBlogPost).then((result) => {
             this.getDataAPI();
             this.setState({
+                formBlogPost: {
+                    id: 1,
+                    title: '',
+                    body: '',
+                    userId: 1
+                }
+            })
+        })
+    }
+
+    // mengupdate / edit data API
+    putDataToAPI = () => {
+        API.updateNewsBlog(this.state.formBlogPost, this.state.formBlogPost.id).then((result) => {
+            this.getDataAPI();
+            this.setState({
+                isUpdate: false,
                 formBlogPost: {
                     id: 1,
                     title: '',
