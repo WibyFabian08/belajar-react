@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Hooks.css';
 
 const Hooks = () => {
@@ -13,6 +13,15 @@ const Hooks = () => {
             setCount(count - 1);
         }
     }
+
+    useEffect(() => {
+        document.title = `title change ${count}`;
+
+        return () => {
+            document.title = 'Belajar React';
+        }
+
+    })
 
     return(
         <div className='container-hooks'>
